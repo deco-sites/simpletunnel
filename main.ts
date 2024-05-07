@@ -1,4 +1,4 @@
-import { PunchmoleServer } from "https://esm.sh/gh/mcandeia/punchmole@15021f5b1a6b4ae338f843127009cc87bfc8c65c/PunchmoleServer.js";
+import { PunchmoleServer } from "https://esm.sh/gh/mcandeia/punchmole@168d33ee3056437e4162fda863386b557197880a/PunchmoleServer.js";
 
 PunchmoleServer(
   Deno.env.get("PORT") ?? 8000, // port number to listen on
