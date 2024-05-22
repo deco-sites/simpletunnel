@@ -1,4 +1,4 @@
-import { PunchmoleServer } from "https://denopkg.com/mcandeia/punchmole@02041f4a9087703e072879f99c6501ac90af9c6b/PunchmoleServer.ts";
+import { PunchmoleServer } from "https://denopkg.com/mcandeia/punchmole@bb09fd1f66331ff76482bcf8fd1698d7db21503d/PunchmoleServer.ts";
 
 const port = Deno.env.get("PORT");
 PunchmoleServer(
