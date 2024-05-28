@@ -86,17 +86,23 @@ const onWsOpened: ClientMessageHandler<DataEndMessage> = async (state, message) 
     if (!request) {
         return;
     }
-    const { socket, response } = Deno.upgradeWebSocket(request.requestObject);
-    request.responseObject.resolve(response);
-    const socketChan = await makeWebSocket<ArrayBuffer, ArrayBuffer>(socket, false);
-    request.socketChan = socketChan.out;
-    (async () => {
-        for await (const msg of socketChan.in.recv()) {
-            await state.ch.out.send({ type: "ws-message", id: message.id, data: msg });
-        }
-        await state.ch.out.send({ type: "ws-closed", id: message.id })
-        socket.close();
-    })()
+    try {
+        const { socket, response } = Deno.upgradeWebSocket(request.requestObject);
+        request.responseObject.resolve(response);
+        const socketChan = await makeWebSocket<ArrayBuffer, ArrayBuffer>(socket, false);
+        request.socketChan = socketChan.out;
+        (async () => {
+            for await (const msg of socketChan.in.recv()) {
+                await state.ch.out.send({ type: "ws-message", id: message.id, data: msg });
+            }
+            await state.ch.out.send({ type: "ws-closed", id: message.id })
+            socket.close();
+        })()
+    }
+    catch (err) {
+        console.error(new Date(), "Error upgrading websocket", err);
+        delete state.ongoingRequests[message.id];
+    }
 }
 const register: ClientMessageHandler<RegisterMessage> = async (state, message) => {
     if (state.apiKeys.includes(message.apiKey)) {
