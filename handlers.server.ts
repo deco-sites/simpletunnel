@@ -132,5 +132,8 @@ const handlersByType: Record<ClientMessage["type"], ClientMessageHandler<any>> =
 }
 export const handleClientMessage: ClientMessageHandler = async (state, message) => {
     console.info(new Date(), `[server]`, message.type, "id" in message ? message.id : "");
-    await handlersByType?.[message.type]?.(state, message);
+    await handlersByType?.[message.type]?.(state, message)?.catch?.(err => {
+        console.error("unexpected error happening when handling message", message, err);
+        delete state.ongoingRequests[message.id];
+    });
 }
