@@ -1,6 +1,5 @@
 {
   "imports": {
-    "site/": "./",
     "deco/": "https://cdn.jsdelivr.net/gh/deco-cx/deco@1.63.17/",
     "apps/": "https://cdn.jsdelivr.net/gh/deco-cx/apps@0.38.3/",
     "$fresh/": "https://deno.land/x/fresh@1.6.8/",
@@ -29,10 +28,12 @@
   ],
   "lint": {
     "rules": {
-      "tags": [
-        "fresh",
-        "recommended"
-      ]
+      "tags": ["fresh", "recommended"]
+    }
+  },
+  "fmt": {
+    "files": {
+      "exclude": ["static/", "README.md"]
     }
   },
   "nodeModulesDir": false,
