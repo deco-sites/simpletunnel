@@ -19,7 +19,7 @@ export interface ServerOptions {
 }
 export const start = (options?: ServerOptions) => {
   const port = (options?.port ?? Deno.env.get("PORT"));
-  const apiKeys = options?.apiKeys ?? Deno.env.get("API_KEYS")?.split(",") ?? ["c309424a-2dc4-46fe-bfc7-a7c10df59477"]; // array of api keys (random strings)
+  const apiKeys = options?.apiKeys ?? Deno.env.get("API_KEYS")?.split(",") ?? []; // array of api keys (random strings)
 
   return Deno.serve({
     handler: async (req) => {
