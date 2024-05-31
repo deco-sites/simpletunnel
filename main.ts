@@ -1,8 +1,8 @@
-import { serve } from "jsr:@deco/warp@0.1.8";
+import { serve } from "jsr:@deco/warp@0.2.0";
 
 const portEnv = Deno.env.get("PORT");
 const port = portEnv ? +portEnv : 8000;
 serve({
-    port,
-    apiKeys: Deno.env.get("API_KEYS")?.split(",") ?? [],
+  port,
+  apiKeys: Deno.env.get("API_KEYS")?.split(",") ?? [],
 });
