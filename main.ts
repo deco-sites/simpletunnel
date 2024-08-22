@@ -1,4 +1,4 @@
-import { serve } from "jsr:@deco/warp@0.3.3";
+import { serve } from "jsr:@deco/warp@0.3.5";
 
 const portEnv = Deno.env.get("PORT");
 const port = portEnv ? +portEnv : 8000;
